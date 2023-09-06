@@ -28,6 +28,18 @@ public class PersonRepository {
         return Optional.empty();
     }
 
+    public Optional<Person> findPersonByName(String name){
+        if(!personMap.isEmpty()){
+            for(Map.Entry<BigInteger, Person> entry : personMap.entrySet()){
+                Optional<Person> person = Optional.of(entry.getValue());
+                if(person.get().name().equals(name)){
+                    return person;
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
     public Optional<Map<Gender, Integer>> countGender(){
         Map<Gender, Integer> genderCount = new HashMap<>();
         if(!personMap.isEmpty()){
@@ -35,7 +47,7 @@ public class PersonRepository {
                 genderCount.putIfAbsent(entry.getValue().gender(), 0);
                 genderCount.put(entry.getValue().gender(), genderCount.get(entry.getValue().gender()) +1);
             }
-            return Optional.ofNullable(genderCount);
+            return Optional.of(genderCount);
         }
         return Optional.empty();
     }

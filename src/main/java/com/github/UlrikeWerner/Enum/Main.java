@@ -39,5 +39,8 @@ public class Main {
         } else {
             System.out.println("Die Liste ist leer!");
         }
+
+        Optional<Person> personByName = pRepo.findPersonByName("Max Min");
+        personByName.ifPresent(System.out::println);
     }
 }
