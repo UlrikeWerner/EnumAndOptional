@@ -1,10 +1,7 @@
 package com.github.UlrikeWerner.Enum;
 
 import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class PersonRepository {
     Map<BigInteger, Person> personMap;
@@ -48,6 +45,19 @@ public class PersonRepository {
                 genderCount.put(entry.getValue().gender(), genderCount.get(entry.getValue().gender()) +1);
             }
             return Optional.of(genderCount);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<List<String>> findPersonsWithTheSameFavoriteDay(DaysOfWeek day){
+        List<String> nameOfPersonsWithTheFavoriteDay = new ArrayList<>();
+        if(!personMap.isEmpty()){
+            for(Map.Entry<BigInteger, Person> entry : personMap.entrySet()){
+                if(entry.getValue().favoriteDay().equals(day)){
+                    nameOfPersonsWithTheFavoriteDay.add(entry.getValue().name());
+                }
+            }
+            return Optional.of(nameOfPersonsWithTheFavoriteDay);
         }
         return Optional.empty();
     }

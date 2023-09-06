@@ -2,6 +2,7 @@ package com.github.UlrikeWerner.Enum;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,5 +43,15 @@ public class Main {
 
         Optional<Person> personByName = pRepo.findPersonByName("Max Min");
         personByName.ifPresent(System.out::println);
+
+        Optional<List<String>> personsWithTheSameDay = pRepo.findPersonsWithTheSameFavoriteDay(DaysOfWeek.SUNDAY);
+        if(personsWithTheSameDay.isPresent() && !personsWithTheSameDay.get().isEmpty()){
+            System.out.println(personsWithTheSameDay);
+        }
+
+        Optional<List<String>> personsWithTheSameDay2 = pRepo.findPersonsWithTheSameFavoriteDay(DaysOfWeek.THURSDAY);
+        if(personsWithTheSameDay2.isPresent() && !personsWithTheSameDay2.get().isEmpty()){
+            System.out.println(personsWithTheSameDay2);
+        }
     }
 }
