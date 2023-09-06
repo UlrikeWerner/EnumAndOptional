@@ -1,6 +1,7 @@
 package com.github.UlrikeWerner.Enum;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,6 +24,18 @@ public class PersonRepository {
     public Optional<Person> findPersonById(BigInteger personId){
         if(personMap.containsKey(personId)){
             return Optional.ofNullable(personMap.get(personId));
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Map<Gender, Integer>> countGender(){
+        Map<Gender, Integer> genderCount = new HashMap<>();
+        if(!personMap.isEmpty()){
+            for(Map.Entry<BigInteger, Person> entry : personMap.entrySet()){
+                genderCount.putIfAbsent(entry.getValue().gender(), 0);
+                genderCount.put(entry.getValue().gender(), genderCount.get(entry.getValue().gender()) +1);
+            }
+            return Optional.ofNullable(genderCount);
         }
         return Optional.empty();
     }
